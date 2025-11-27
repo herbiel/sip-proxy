@@ -29,6 +29,7 @@ func main() {
 
 	port := flag.Int("port", 5060, "SIP server port")
 	callbackURL := flag.String("callback-url", "", "HTTP callback URL for INVITE notifications (optional)")
+	defaultInstructions := flag.String("default-instructions", "", "Default system instructions used when no callback URL is provided")
 	twilioPort := flag.Int("twilio-port", 8080, "Twilio webhook server port")
 	sipUsername := flag.String("sip-username", "", "SIP username for Twilio")
 	sipPassword := flag.String("sip-password", "", "SIP password for Twilio")
@@ -56,6 +57,7 @@ func main() {
 	config := &Config{
 		Port:        *port,
 		CallbackURL: *callbackURL,
+		DefaultInstructions: *defaultInstructions,
 	}
 
 	// Create media handler factory
@@ -111,6 +113,7 @@ func main() {
 type Config struct {
 	Port        int
 	CallbackURL string
+	DefaultInstructions string
 }
 
 // MediaHandlerFactory creates media handlers
